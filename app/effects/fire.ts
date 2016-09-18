@@ -1,13 +1,12 @@
-import {Effect} from './effect';
 import * as Utils from '../utils';
 
-export class Fire implements Effect {
+export class Fire {
   public $: CanvasRenderingContext2D;
   public w: number;
   public h: number;
 
   private amount: number;
-  private arr: any[];
+  private arr: any[] = [];
 
   constructor(canvas, amount = 90) {
     this.$ = canvas.$;
@@ -33,12 +32,9 @@ export class Fire implements Effect {
   }
 
   generate() {
-    var i, snowflake;
-    this.arr = [];
-
-    for (i = 0; i < this.amount; ++i) {
-      snowflake = this.config(i);
-      this.arr.push(snowflake);
+    for (let i = 0; i < this.amount; ++i) {
+      let spark = this.config(i);
+      this.arr.push(spark);
     }
   }
 
@@ -53,18 +49,24 @@ export class Fire implements Effect {
   }
 
   tick(_) {
-    var index = _;
+    let index = _;
     _ = this.arr[_];
     this.$.fillStyle = "rgba(255,170,100, " + _.alpha + ")";
 
     if (_.id % 2 === 0) {
       this.$.fillRect(_.x, _.y, 3, 3);
     } else {
-      this.flake(_);
+      this.spark(_);
     }
 
     _.y -= _.vy;
-    _.id % 2 === 0 ? _.x = Utils.Sin(_.x, _.angle, 1, true) : _.x = Utils.Cos(_.x, _.angle, 0.5, true);
+
+    if (_.id % 2 === 0) {
+      _.x = Utils.Sin(_.x, _.angle, 1, true);
+    } else {
+      _.x = Utils.Cos(_.x, _.angle, 0.5, true);
+    }
+
     _.angle += 0.01;
 
     if (_.init) {
@@ -80,16 +82,16 @@ export class Fire implements Effect {
     }
   }
 
-  flake(_) {
-    var size = 3;
+  spark(_) {
+    let size = 3;
 
     this.$.save();
     this.$.translate(_.x, _.y);
 
-    for (var row = 0; row < 3; row++) {
-      for (var column = 0; column < 3; column++) {
-        var x = column * size;
-        var y = row * size;
+    for (let row = 0; row < 3; row++) {
+      for (let column = 0; column < 3; column++) {
+        let x = column * size;
+        let y = row * size;
 
         if (row % 2 == 0) {
           if (column % 2 == 0) {
@@ -114,12 +116,9 @@ export class Fire implements Effect {
   }
 
   render() {
-    var _this = this,
-      i;
-
     this.$.clearRect(0, 0, this.w, this.h);
 
-    for (i = 0; i < this.arr.length; ++i) {
+    for (let i = 0; i < this.arr.length; ++i) {
       this.tick(i);
     }
 
@@ -127,10 +126,10 @@ export class Fire implements Effect {
   }
 
   init() {
-    var i;
-    for (i = 0; i < this.arr.length; ++i) {
+    for (let i = 0; i < this.arr.length; ++i) {
       this.reset(i);
     }
 
     this.render();
   }
+}

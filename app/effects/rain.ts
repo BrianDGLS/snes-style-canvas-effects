@@ -1,12 +1,11 @@
 import * as Utils from '../utils';
-import {Effect} from './effect';
 
-export class Rain implements Effect {
+export class Rain {
   public $: CanvasRenderingContext2D;
   public w: number;
   public h: number;
   private amount: number;
-  private arr: any[];
+  private arr: any[] = [];
 
   constructor(canvas, amount = 100) {
     this.$ = canvas.$;
@@ -32,12 +31,9 @@ export class Rain implements Effect {
   }
 
   generate() {
-    var i, snowflake;
-    this.arr = [];
-
-    for (i = 0; i < this.amount; ++i) {
-      snowflake = this.config(i);
-      this.arr.push(snowflake);
+    for (let i = 0; i < this.amount; ++i) {
+      let rainDrop = this.config(i);
+      this.arr.push(rainDrop);
     }
   }
 
@@ -59,7 +55,7 @@ export class Rain implements Effect {
   }
 
   tick(_) {
-    var index = _;
+    let index = _;
     _ = this.arr[_];
     this.$.fillStyle = "rgba(155,155,255, " + _.alpha + ")";
 
@@ -89,12 +85,9 @@ export class Rain implements Effect {
   }
 
   render() {
-    var _this = this,
-      i;
-
     this.$.clearRect(0, 0, this.w, this.h);
 
-    for (i = 0; i < this.arr.length; ++i) {
+    for (let i = 0; i < this.arr.length; ++i) {
       this.tick(i);
     }
 
@@ -102,8 +95,7 @@ export class Rain implements Effect {
   }
 
   init() {
-    var i;
-    for (i = 0; i < this.arr.length; ++i) {
+    for (let i = 0; i < this.arr.length; ++i) {
       this.reset(i);
     }
 

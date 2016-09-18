@@ -9,6 +9,7 @@
   <script>
       System.import('app').catch(function(err){ console.error(err); });
   </script>
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,800" rel="stylesheet">
   <style>
     html,
@@ -23,10 +24,27 @@
       font-weight: 400;
       margin: 0;
     }
-
-    h1, h2 {
+    
+    h1,
+    h2 {
       color: #222;
       font-family: 'Open Sans', sans-serif;
+    }
+    
+    footer {
+      border-top: 2px solid #111;
+      padding: 1rem 0;
+      margin-top: 3rem;
+    }
+    
+    header {
+      border-bottom: 2px solid #111;
+      padding: 1rem 0;
+      margin-bottom: 3rem;
+    }
+    
+    p {
+      text-align: justify;
     }
     
     .wrap {
@@ -46,22 +64,6 @@
     #rain {
       background: linear-gradient(180deg, rgb(84, 14, 195), rgb(30, 0, 30));
     }
-    
-    footer {
-      border-top: 2px solid #111;
-      padding: 1rem 0;
-      margin-top: 3rem;
-    }
-    
-    header {
-      border-bottom: 2px solid #111;
-      padding: 1rem 0;
-      margin-bottom: 3rem;
-    }
-
-    p {
-      text-align: justify;
-    }
   </style>
 </head>
 
@@ -69,27 +71,41 @@
   <div class="wrap">
     <header>
       <h1>Snes Style Canvas Effects</h1>
-      <p>Here are three atmospheric Super Nintendo, <i>SNES</i>, style effects.</p>
+      <p>Here are three atmospheric Super Nintendo, <i>SNES</i>, style canvas effects.</p>
       <p>
         All three are written in Typescript and compile to around ~100 lines of js code. There were no external libraries used.
-        I wanted to give an example of how to use the canvas api without relying on a third party library.
       </p>
-      <p>Feel free to view the source code on <a href="">github</a>. I'd also really appreciated it if you could star the repo.</p>
+      <a class="github-button" href="https://github.com/BrianDGLS/snes-style-canvas-effects" data-style="mega" data-count-href="/BrianDGLS/snes-style-canvas-effects/stargazers"
+        data-count-api="/repos/BrianDGLS/snes-style-canvas-effects#stargazers_count" data-count-aria-label="# stargazers on GitHub"
+        aria-label="Star BrianDGLS/snes-style-canvas-effects on GitHub">Star</a>
     </header>
 
     <h2>Snow</h2>
     <canvas id="snow"></canvas>
+    <p><a href="https://github.com/BrianDGLS/snes-style-canvas-effects/blob/master/app/effects/snow.ts" target="_blank">source</a></p>
 
     <h2>Fire</h2>
     <canvas id="fire"></canvas>
+    <p><a href="https://github.com/BrianDGLS/snes-style-canvas-effects/blob/master/app/effects/fire.ts" target="_blank">source</a></p>
 
     <h2>Rain</h2>
     <canvas id="rain"></canvas>
+    <p><a href="https://github.com/BrianDGLS/snes-style-canvas-effects/blob/master/app/effects/rain.ts" target="_blank">source</a></p>
 
     <footer>
       <p>&copy; 2016 - Brian Douglas</p>
     </footer>
   </div>
+
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-78530760-4', 'auto');
+    ga('send', 'pageview');
+  </script>
 </body>
 
 </html>

@@ -3,6 +3,7 @@ var Utils = require('../utils');
 var Snow = (function () {
     function Snow(canvas, amount) {
         if (amount === void 0) { amount = 30; }
+        this.arr = [];
         this.$ = canvas.$;
         this.w = canvas.w;
         this.h = canvas.h;
@@ -23,7 +24,6 @@ var Snow = (function () {
     };
     Snow.prototype.generate = function () {
         var i, snowflake;
-        this.arr = [];
         for (i = 0; i < this.amount; ++i) {
             snowflake = this.config(i);
             this.arr.push(snowflake);
@@ -41,7 +41,7 @@ var Snow = (function () {
     Snow.prototype.tick = function (_) {
         var index = _;
         _ = this.arr[_];
-        this.$.fillStyle = "rgba(255,255,255, " + _.alpha + ")";
+        this.$.fillStyle = "rgba(255,255,255," + _.alpha + ")";
         if (_.id % 2 === 0) {
             this.$.fillRect(_.x, _.y, 3, 3);
         }
@@ -49,7 +49,12 @@ var Snow = (function () {
             this.flake(_);
         }
         _.y += _.vy;
-        _.id % 2 === 0 ? _.x = Utils.Sin(_.x, _.angle, 1, true) : _.x = Utils.Cos(_.x, _.angle, 0.5, true);
+        if (_.id % 2 === 0) {
+            _.x = Utils.Sin(_.x, _.angle, 1, true);
+        }
+        else {
+            _.x = Utils.Cos(_.x, _.angle, 0.5, true);
+        }
         _.angle += 0.01;
         if (_.init) {
             _.alpha -= 0.01;

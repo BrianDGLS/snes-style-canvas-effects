@@ -3,6 +3,7 @@ var Utils = require('../utils');
 var Rain = (function () {
     function Rain(canvas, amount) {
         if (amount === void 0) { amount = 100; }
+        this.arr = [];
         this.$ = canvas.$;
         this.w = canvas.w;
         this.h = canvas.h;
@@ -22,11 +23,9 @@ var Rain = (function () {
         };
     };
     Rain.prototype.generate = function () {
-        var i, snowflake;
-        this.arr = [];
-        for (i = 0; i < this.amount; ++i) {
-            snowflake = this.config(i);
-            this.arr.push(snowflake);
+        for (var i = 0; i < this.amount; ++i) {
+            var rainDrop = this.config(i);
+            this.arr.push(rainDrop);
         }
     };
     Rain.prototype.reset = function (_) {
@@ -72,16 +71,14 @@ var Rain = (function () {
         }
     };
     Rain.prototype.render = function () {
-        var _this = this, i;
         this.$.clearRect(0, 0, this.w, this.h);
-        for (i = 0; i < this.arr.length; ++i) {
+        for (var i = 0; i < this.arr.length; ++i) {
             this.tick(i);
         }
         window.requestAnimationFrame(this.render.bind(this));
     };
     Rain.prototype.init = function () {
-        var i;
-        for (i = 0; i < this.arr.length; ++i) {
+        for (var i = 0; i < this.arr.length; ++i) {
             this.reset(i);
         }
         this.render();

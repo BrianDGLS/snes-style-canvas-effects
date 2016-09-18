@@ -3,6 +3,7 @@ var Utils = require('../utils');
 var Fire = (function () {
     function Fire(canvas, amount) {
         if (amount === void 0) { amount = 90; }
+        this.arr = [];
         this.$ = canvas.$;
         this.w = canvas.w;
         this.h = canvas.h;
@@ -22,11 +23,9 @@ var Fire = (function () {
         };
     };
     Fire.prototype.generate = function () {
-        var i, snowflake;
-        this.arr = [];
-        for (i = 0; i < this.amount; ++i) {
-            snowflake = this.config(i);
-            this.arr.push(snowflake);
+        for (var i = 0; i < this.amount; ++i) {
+            var spark = this.config(i);
+            this.arr.push(spark);
         }
     };
     Fire.prototype.reset = function (_) {
@@ -46,10 +45,15 @@ var Fire = (function () {
             this.$.fillRect(_.x, _.y, 3, 3);
         }
         else {
-            this.flake(_);
+            this.spark(_);
         }
         _.y -= _.vy;
-        _.id % 2 === 0 ? _.x = Utils.Sin(_.x, _.angle, 1, true) : _.x = Utils.Cos(_.x, _.angle, 0.5, true);
+        if (_.id % 2 === 0) {
+            _.x = Utils.Sin(_.x, _.angle, 1, true);
+        }
+        else {
+            _.x = Utils.Cos(_.x, _.angle, 0.5, true);
+        }
         _.angle += 0.01;
         if (_.init) {
             _.alpha -= 0.01;
@@ -64,7 +68,7 @@ var Fire = (function () {
             _.init = true;
         }
     };
-    Fire.prototype.flake = function (_) {
+    Fire.prototype.spark = function (_) {
         var size = 3;
         this.$.save();
         this.$.translate(_.x, _.y);
@@ -95,16 +99,14 @@ var Fire = (function () {
         this.$.restore();
     };
     Fire.prototype.render = function () {
-        var _this = this, i;
         this.$.clearRect(0, 0, this.w, this.h);
-        for (i = 0; i < this.arr.length; ++i) {
+        for (var i = 0; i < this.arr.length; ++i) {
             this.tick(i);
         }
         window.requestAnimationFrame(this.render.bind(this));
     };
     Fire.prototype.init = function () {
-        var i;
-        for (i = 0; i < this.arr.length; ++i) {
+        for (var i = 0; i < this.arr.length; ++i) {
             this.reset(i);
         }
         this.render();

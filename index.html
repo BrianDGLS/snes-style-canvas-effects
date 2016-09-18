@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Snes Style - Canvas</title>
+  <script src="node_modules/systemjs/dist/system.src.js"></script>
+  <script src="systemjs.config.js"></script>
+  <script>
+      System.import('app').catch(function(err){ console.error(err); });
+  </script>
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,800" rel="stylesheet">
+  <style>
+    html,
+    body {
+      height: 100%;
+      width: 100%;
+    }
+    
+    body {
+      color: #222;
+      font-family: 'Open Sans', sans-serif;
+      font-weight: 400;
+      margin: 0;
+    }
+
+    h1, h2 {
+      color: #222;
+      font-family: 'Open Sans', sans-serif;
+    }
+    
+    .wrap {
+      margin: 0 auto;
+      max-width: 768px;
+      width: 90%;
+    }
+    
+    #snow {
+      background: linear-gradient(180deg, rgb(84, 114, 195), rgb(125, 205, 178));
+    }
+    
+    #fire {
+      background: linear-gradient(180deg, rgb(125, 0, 208), rgb(255, 84, 55));
+    }
+    
+    #rain {
+      background: linear-gradient(180deg, rgb(84, 14, 195), rgb(30, 0, 30));
+    }
+    
+    footer {
+      border-top: 2px solid #111;
+      padding: 1rem 0;
+      margin-top: 3rem;
+    }
+    
+    header {
+      border-bottom: 2px solid #111;
+      padding: 1rem 0;
+      margin-bottom: 3rem;
+    }
+
+    p {
+      text-align: justify;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <header>
+      <h1>Snes Style Canvas Effects</h1>
+      <p>Here are three atmospheric Super Nintendo, <i>SNES</i>, style effects.</p>
+      <p>
+        All three are written in Typescript and compile to around ~100 lines of js code. There were no external libraries used.
+        I wanted to give an example of how to use the canvas api without relying on a third party library.
+      </p>
+      <p>Feel free to view the source code on <a href="">github</a>. I'd also really appreciated it if you could star the repo.</p>
+    </header>
+
+    <h2>Snow</h2>
+    <canvas id="snow"></canvas>
+
+    <h2>Fire</h2>
+    <canvas id="fire"></canvas>
+
+    <h2>Rain</h2>
+    <canvas id="rain"></canvas>
+
+    <footer>
+      <p>&copy; 2016 - Brian Douglas</p>
+    </footer>
+  </div>
+</body>
+
+</html>

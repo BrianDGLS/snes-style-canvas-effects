@@ -1,0 +1,15 @@
+{
+  "name": "8-bit-effects",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "BrianDGLS <briandgls@yahoo.com>",
+  "license": "ISC",
+  "dependencies": {
+    "systemjs": "^0.19.38"
+  }
+}
